@@ -1,0 +1,53 @@
+下载源代码
+# git clone git@github.com:FuYuanDe/OpenBFDD.git 
+
+安装命令
+# aclocal																				
+# autoconf
+# autoheader
+# automake --add-missing
+# ./configure
+# make
+# sudo make install
+
+//启动bfdd-beacon服务，地址用于和bfdd-control通信
+bfdd-beacon --control=172.25.1.192:6666
+
+使用方法：
+//设置与bfdd-beacon通信接口
+bfdd-control --control=192.168.23.131:6666 
+
+//设置发送时长为1s
+bfdd-control --control=172.25.1.192:6666 session new set mintx 1 s
+
+//设置接收时长为1s
+bfdd-control --control=172.25.1.192:6666 session new set minrx 1 s
+
+//设置检测次数
+bfdd-control --control=172.25.1.192:6666 session new set multi 3
+
+//创建会话
+bfdd-control --control=172.25.1.192:6666 connect local 172.25.1.192 remote 172.25.77.100
+
+//删除会话
+bfdd-control --control=172.25.1.192:6666 session remote 172.25.77.100 local 172.25.1.192  kill
+
+//查看指定会话状态
+bfdd-control --control=172.25.1.192:6666 status local 172.25.1.192 remote 172.25.77.100
+
+//查看所有会话状态h o
+bfdd-control --control=172.25.1.192:6666 status all
+
+//停止会话
+bfdd-control --control=172.25.1.192:6666 session remote 172.25.77.100 local 172.25.1.192 suspend 
+
+//继续会话
+
+
+其它操作：
+
+bfdd-beacon   : 
+http://dyninc.github.io/OpenBFDD/bfdd-beacon.8.html
+
+bfdd-control : 
+http://dyninc.github.io/OpenBFDD/bfdd-control.8.html
